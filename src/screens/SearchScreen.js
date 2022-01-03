@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 // since searchbar will be in the search screen page we need to import that SearchBar component in here
 import SearchBar from "../components/SearchBar";
+import yelp from "../api/yelp";
 
 
 const SearchScreen = () => {
     const [term, setTerm] = useState(''); //cause we are using search so much we can name it term
-
+    const [restaurants, setRestaurants] = useState([]); //useState something that updates, so this is the part of API 
     return (
         <View>
             {/* We want the Search Bar to appear above the Search Screen text so place it above search screen */}
