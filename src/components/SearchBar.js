@@ -3,14 +3,24 @@ import React  from "react";
 import { View, TextInput, StyleSheet } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons'; //importing the search icon from the expowebsite https://github.com/expo/vector-icons
 
-const SearchBar= () => {
+const SearchBar= ({ term, onTermChange, onTermSubmit }) => {
     return (
         
         <View style={styles.backgroundStyle}>
             {/*This is the css code from expowebsite to style the search icon */}
             <FontAwesome5 name="search" style={styles.iconStyle}/> 
             {/* here we are styling the text space    */}
-            <TextInput style = {styles.inputStyle} placeholder="Search"/> 
+            <TextInput 
+                autoCapitalize="none"
+                autoComplete="false"
+                style = {styles.inputStyle} 
+                placeholder="Search"
+                value={term}
+                onChangeText = { onTermChange }
+                // This prop onEndEditing basicly when you hit enter is submits search
+                onEndEditing={ onTermSubmit } 
+            /> 
+
         </View>
     );
 
