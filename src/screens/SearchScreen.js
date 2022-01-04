@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 // since searchbar will be in the search screen page we need to import that SearchBar component in here
 import SearchBar from "../components/SearchBar";
 import yelp from "../api/yelp";
 import useRestaurants from "../hooks/useRestaurants";
+import RestaurantList from "../components/Restaurants";
 
 
 const SearchScreen = () => {
@@ -21,6 +22,9 @@ const SearchScreen = () => {
              {/* if there is error then print the error message otherwise nothing */}
             {errorMessage ? <Text>{errorMessage}</Text> : null}
             <Text>We have found {restaurants.length} restaurants</Text>
+            <RestaurantList title = "Cost Effective" />
+            <RestaurantList titel = "Bit Pricier"/>
+            <RestaurantList titel = "Big Spender"/>
         </View>
     );
 };
