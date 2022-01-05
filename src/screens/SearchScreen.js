@@ -4,12 +4,20 @@ import { View, Text, StyleSheet } from "react-native";
 import SearchBar from "../components/SearchBar";
 import yelp from "../api/yelp";
 import useRestaurants from "../hooks/useRestaurants";
-import RestaurantList from "../components/Restaurants";
+import RestaurantsList from "../components/Restaurants";
 
 
 const SearchScreen = () => {
     const [term, setTerm] = useState(''); //cause we are using search so much we can name it term
     const [searchApi, restaurants, errorMessage ] = useRestaurants();
+    
+    const filterRestaurantsByPrice = (price) => {
+        //price === '$' || '$$' || '$$$'
+        return restaurants.filter(restaurant => {
+            return restaurant.price === price;
+        });
+
+    };
   
     return (
         <View>
@@ -22,9 +30,9 @@ const SearchScreen = () => {
              {/* if there is error then print the error message otherwise nothing */}
             {errorMessage ? <Text>{errorMessage}</Text> : null}
             <Text>We have found {restaurants.length} restaurants</Text>
-            <RestaurantList title = "Cost Effective" />
-            <RestaurantList titel = "Bit Pricier"/>
-            <RestaurantList titel = "Big Spender"/>
+            <RestaurantsList restaurants = {filterRestaurantsByPrice('$')} title= "Cost Effective" />
+            <RestaurantsList restaurants = {filterRestaurantsByPrice('$$')} title = "Bit Pricier"/>
+            <RestaurantsList restaurants = {filterRestaurantsByPrice('$$$')} title = "Big Spender"/>
         </View>
     );
 };
